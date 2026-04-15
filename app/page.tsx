@@ -1,58 +1,49 @@
-import { DeployButton } from "@/components/deploy-button";
-import { EnvVarWarning } from "@/components/env-var-warning";
-import { AuthButton } from "@/components/auth-button";
-import { Hero } from "@/components/hero";
-import { ThemeSwitcher } from "@/components/theme-switcher";
-import { ConnectSupabaseSteps } from "@/components/tutorial/connect-supabase-steps";
-import { SignUpUserSteps } from "@/components/tutorial/sign-up-user-steps";
-import { hasEnvVars } from "@/lib/utils";
-import Link from "next/link";
-import { Suspense } from "react";
+import Image from "next/image";
 
 export default function Home() {
   return (
-    <main className="min-h-screen flex flex-col items-center">
-      <div className="flex-1 w-full flex flex-col gap-20 items-center">
-        <nav className="w-full flex justify-center border-b border-b-foreground/10 h-16">
-          <div className="w-full max-w-5xl flex justify-between items-center p-3 px-5 text-sm">
-            <div className="flex gap-5 items-center font-semibold">
-              <Link href={"/"}>Next.js Supabase Starter</Link>
-              <div className="flex items-center gap-2">
-                <DeployButton />
-              </div>
-            </div>
-            {!hasEnvVars ? (
-              <EnvVarWarning />
-            ) : (
-              <Suspense>
-                <AuthButton />
-              </Suspense>
-            )}
+    <main className="h-screen w-screen overflow-hidden bg-[#0d1320]">
+      <section className="relative h-full w-full overflow-hidden">
+        <div className="grid h-full grid-cols-1 md:grid-cols-2">
+          <div className="relative flex items-center justify-center bg-[#1a2436] p-8 md:p-12">
+              <Image
+                src="/ragemp_logo.png"
+                alt="RAGE:MP logo"
+                width={260}
+                height={260}
+                className="h-auto w-[160px] md:w-[230px]"
+                priority
+              />
           </div>
-        </nav>
-        <div className="flex-1 flex flex-col gap-20 max-w-5xl p-5">
-          <Hero />
-          <main className="flex-1 flex flex-col gap-6 px-4">
-            <h2 className="font-medium text-xl mb-4">Next steps</h2>
-            {hasEnvVars ? <SignUpUserSteps /> : <ConnectSupabaseSteps />}
-          </main>
+
+          <div className="relative flex items-center justify-center bg-[#22304a] p-8 md:p-12">
+              <Image
+                src="/samp_logo.png"
+                alt="SA:MP logo"
+                width={460}
+                height={260}
+                className="h-auto w-[230px] md:w-[360px]"
+                priority
+              />
+          </div>
         </div>
 
-        <footer className="w-full flex items-center justify-center border-t mx-auto text-center text-xs gap-8 py-16">
-          <p>
-            Powered by{" "}
-            <a
-              href="https://supabase.com/?utm_source=create-next-app&utm_medium=template&utm_term=nextjs"
-              target="_blank"
-              className="font-bold hover:underline"
-              rel="noreferrer"
-            >
-              Supabase
-            </a>
-          </p>
-          <ThemeSwitcher />
-        </footer>
-      </div>
+        <div
+          aria-hidden="true"
+          className="pointer-events-none absolute inset-y-0 left-1/2 hidden w-1 -translate-x-1/2 bg-[#10f140] shadow-[0_0_22px_2px_rgba(16,241,64,0.9)] md:block"
+        />
+
+        <button
+          type="button"
+          aria-label="Switch between game modes"
+          className="absolute left-1/2 top-1/2 z-10 hidden h-16 w-16 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full border-2 border-[#10f140] bg-[#10f140] text-white shadow-[0_0_25px_3px_rgba(16,241,64,0.75)] transition-transform duration-200 hover:scale-105 md:flex"
+        >
+          <span className="flex items-center gap-1 text-xl font-black leading-none">
+            <span>◀</span>
+            <span>▶</span>
+          </span>
+        </button>
+      </section>
     </main>
   );
 }
