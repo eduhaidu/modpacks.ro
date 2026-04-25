@@ -2,6 +2,7 @@
 import Image from "next/image";
 import type { MouseEvent } from "react";
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 
 export default function Home() {
   const [game, setGame] = useState<"ragemp" | "samp" | "neutral">("neutral");
@@ -19,6 +20,7 @@ export default function Home() {
       ? "translate(0%, -50%)"
       : "translate(-50%, -50%)";
   const deadZonePx = 24;
+  const router = useRouter();
 
   const handleSectionMouseMove = (event: MouseEvent<HTMLElement>) => {
     const bounds = event.currentTarget.getBoundingClientRect();
@@ -41,6 +43,7 @@ export default function Home() {
 
   return (
     <main className="h-screen w-screen overflow-hidden bg-[#0d1320]">
+      <span className="text-white-500 font-bold z-50 relative">modpacks.ro</span>
       <section
         className="relative h-full w-full overflow-hidden"
         onMouseMove={handleSectionMouseMove}
@@ -87,7 +90,7 @@ export default function Home() {
                   className="h-auto w-[180px] md:w-[300px]"
                   priority
                 />
-                <button className="pointer-events-auto rounded-full border border-white/30 bg-green-500 px-5 py-3 text-sm font-bold text-white transition-colors hover:bg-green-600 md:text-base">
+                <button onClick={() => router.push("/mods/ragemp")} className="pointer-events-auto rounded-full border border-white/30 bg-green-500 px-5 py-3 text-sm font-bold text-white transition-colors hover:bg-green-600 md:text-base">
                   <span className="flex items-center gap-2 leading-none">
                     <span>Moduri RAGE:MP</span>
                     <span>▶</span>
@@ -137,7 +140,7 @@ export default function Home() {
                   className="h-auto w-[220px] md:w-[320px]"
                   priority
                 />
-                <button className="pointer-events-auto rounded-full border border-white/30 bg-green-500 px-5 py-3 text-sm font-bold text-white transition-colors hover:bg-green-600 md:text-base">
+                <button onClick={() => router.push("/mods/samp")} className="pointer-events-auto rounded-full border border-white/30 bg-green-500 px-5 py-3 text-sm font-bold text-white transition-colors hover:bg-green-600 md:text-base">
                   <span className="flex items-center gap-2 leading-none">
                     <span>Moduri SA:MP</span>
                     <span>▶</span>
